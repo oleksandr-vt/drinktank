@@ -57,32 +57,6 @@ function bindModal(trigger, modal) {
 }
 bindModal('.modal__btn', '.modal__wrapper')
 
-// Slider
-const swiper = new Swiper('.swiper', {
-  spaceBetween: 20,
-  allowTouchMove: true,
-
-  pagination: {
-    el: '.swiper-pagination',
-    clickable: true,
-  },
-
-  breakpoints: {
-    320: {
-      slidesPerView: 1,
-    },
-    768: {
-      slidesPerView: 2,
-    },
-    992: {
-      slidesPerView: 3,
-    },
-    1200: {
-      slidesPerView: 4,
-    },
-  },
-})
-
 // Accordion
 function accordion() {
   const items = document.querySelectorAll('.accordion__item-trigger')
@@ -100,4 +74,17 @@ function accordion() {
     })
   })
 }
-accordion() 
+accordion()
+
+document.querySelectorAll('.vimeo-facade').forEach(facade => {
+  facade.addEventListener('click', () => {
+    const id = facade.dataset.vimeoId
+    const params = facade.dataset.vimeoParams
+    const iframe = document.createElement('iframe')
+    iframe.src = `https://player.vimeo.com/video/${id}?${params}&autoplay=1`
+    iframe.allow = 'autoplay; fullscreen; picture-in-picture'
+    iframe.title = 'Drinktank: 2 minute introduction'
+    facade.innerHTML = ''
+    facade.appendChild(iframe)
+  })
+})
